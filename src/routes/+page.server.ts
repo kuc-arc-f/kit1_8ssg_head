@@ -12,7 +12,7 @@ import Config from '$lib/LibConfig';
 const getList = async function (): Promise<any> 
 {
   try {   
-    let postItem: any[] = [];
+    let cmsData: any = {};
     const item = {
       siteId:  Config.MY_SITE_ID,
     }
@@ -21,11 +21,19 @@ const getList = async function (): Promise<any>
       headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify(item),
     });        
-    //const req = await fetch( url );
     const json = await res.json();  
 //console.log(json)    
-    postItem = json;
-    return postItem;
+    cmsData.items = json;
+    //page
+    const resPage = await fetch(Config.MY_JSON_URL + "/pages/index", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', },
+      body: JSON.stringify(item),
+    });     
+    const jsonPage = await resPage.json(); 
+//console.log(jsonPage)  
+    cmsData.pageItems = jsonPage;
+    return cmsData;
   } catch (e) {
     console.error(e);
   }
@@ -33,12 +41,13 @@ const getList = async function (): Promise<any>
 //
 /** @type {import('./$types').PageServerLoad} */
 export const load: PageServerLoad = async ({ params }) => {
-    const items = await getList();
-//console.log(items);
+    const data = await getList();
+//console.log(data);
     return {
       title: 'Hello world!',
       content: 'Welcome to our blog. Lorem ipsum dolor sit amet...',
-      items: items,
+      items: data.items,
+      pageItems: data.pageItems,
     };
     throw error(404, 'Not found');
 }

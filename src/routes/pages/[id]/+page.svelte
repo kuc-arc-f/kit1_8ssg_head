@@ -1,3 +1,4 @@
+<!-- routes/posts/[id]/+page.svelte -->
 <svelte:head>
 	<title>Posts</title>
 	<meta name="description" content="About this app" />
@@ -10,21 +11,21 @@ import Config from '$lib/LibConfig';
 import LibGraphql from '$lib/LibGraphql';
 
 export let data:PageServerData, post: any = {};
-//console.log(data.item);
+console.log(data.item);
 post = data.item;
 let content = post.content;
 content = LibGraphql.getTagString(content)
 content = marked.parse(content);
-console.log(content);
 </script>
 
 <!-- MarkUp -->
 <div class="container post_show_wrap">
-	<a href={`/`} class="btn">
+	<a href={`/`}>
 		<button class="btn btn-outline-primary my-2">Back</button>
-	</a>		
+	</a>
+	<hr />	
 	<h1>{post.title}</h1>
 	<hr />
-	<div class="post_item">{@html content}</div>
+	<div>{@html content}</div>
 	<hr />
 </div>
