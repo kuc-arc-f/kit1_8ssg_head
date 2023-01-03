@@ -2,6 +2,7 @@ import { dev } from '$app/environment';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import Config from '$lib/LibConfig';
+import LibCommon from '$lib/LibCommon';
 
 /**
 * getList
@@ -22,8 +23,11 @@ const getList = async function (): Promise<any>
       body: JSON.stringify(item),
     });        
     const json = await res.json();  
-//console.log(json)    
-    cmsData.items = json;
+ 
+    let items = json;
+    items  = LibCommon.getDateArray(items);
+//console.log(items); 
+    cmsData.items = items;
     //page
     const resPage = await fetch(Config.MY_JSON_URL + "/pages/index", {
       method: 'POST',

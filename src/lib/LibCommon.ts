@@ -6,13 +6,15 @@ const LibCommon = {
   {
     try{
       let ret = "";
-      let dtObj = new Date(Number(value));
+//      let dtObj = new Date(Number(value));
+      let dtObj = new Date(value);
+//console.log(dtObj);
       let dt = moment(dtObj);      
       ret = dt.format("YYYY-MM-DD");
       return ret;
     } catch (e) {
       console.log(e);
-      throw new Error('error, test1');
+      throw new Error('error, converDateString');
     }
   },
   /**
@@ -54,7 +56,7 @@ const LibCommon = {
      }
    },  
   /**
-  * getDatetimeArray
+  * getDatetimeArray (YYYY-MM-DD HH:mm)
   * @param items: array
   *
   * @return array | null
@@ -64,7 +66,7 @@ const LibCommon = {
     try{
       const ret: any[] = [];
       items.forEach(function (item: any){
-        let dtObj = new Date(item.created_at);
+        let dtObj = new Date(item.createdAt);
         let dt = moment(dtObj);      
         let dtStr = dt.format("YYYY-MM-DD HH:mm");        
 //console.log(item.created_at);
@@ -102,7 +104,7 @@ const LibCommon = {
     }
   },
   /**
-  * getDateArray
+  * getDateArray (YYYY-MM-DD)
   * @param items: array
   *
   * @return array | null

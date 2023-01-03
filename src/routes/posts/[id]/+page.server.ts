@@ -29,9 +29,12 @@ console.log("id=", params.id);
   const item = await getitem(params.id);
 //console.log(item);
     return {
-      title: 'Hello world: id=' + params.id,
-      content: 'Welcome to our blog. Lorem ipsum dolor sit amet...',
       item: item,
+      id: params.id,
     };
 //    throw error(404, 'Not found');
 }
+/*
+title: 'Hello world: id=' + params.id,
+content: 'Welcome to our blog. Lorem ipsum dolor sit amet...',
+*/

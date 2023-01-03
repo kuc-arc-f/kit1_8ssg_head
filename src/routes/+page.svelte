@@ -37,7 +37,7 @@ export let data: PageServerData;
 			<div id="post_items_box" class="card-body mt-2 mb-4">
 				{#each data.items as item}
 				<IndexRow id={item.id}  title={item.title} 
-				date={item.createdAt} category={""}  />  				
+				date={item.dt_str} category={""}  />  				
 				{/each}	
 			</div><!-- post_items_box_end -->
 		</div><!-- body_wrap_end -->

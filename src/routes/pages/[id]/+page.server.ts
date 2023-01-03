@@ -32,6 +32,7 @@ console.log("id=", params.id);
 //console.log(item);
     return {
       item: item,
+      id: params.id,
     };
 //    throw error(404, 'Not found');
 }
